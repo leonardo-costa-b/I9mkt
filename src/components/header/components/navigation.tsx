@@ -6,13 +6,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 
-const menuItems = [
-    { name: 'Home', link: '/' },
-    { name: 'Coaching', link: '/#about' },
-    { name: 'Team', link: '/#services' },
-    { name: 'Case Studios', link: '/#blog' },
-    { name: 'Contact', link: '/#contact' },
-];
+import { menuItems } from '@/constants/menu-links';
 
 export function Navigation() {
     const pathname = usePathname();

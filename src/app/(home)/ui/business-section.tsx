@@ -12,7 +12,7 @@ export function BusinessSection() {
 
             <div className="px-6 max-lg:w-full max-lg:px-4 max-lg:pt-4">
                 <SectionTitle title="Business" />
-                <p className="py-6 text-lg text-gray-600 max-lg:py-4 max-lg:text-center">
+                <p className="py-6 text-lg text-gray-600 max-lg:py-4">
                     This is the Business section of the application.
                 </p>
                 <Link

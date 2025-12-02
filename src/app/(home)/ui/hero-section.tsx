@@ -7,8 +7,15 @@ export function HeroSection() {
             <div className="px-6 lg:w-1/2">
                 <h2 className="leading-16 text-gray-700 capitalize max-lg:text-3xl max-lg:leading-10 lg:text-5xl">
                     <span className="font-bold text-gray-900">Business</span>{' '}
-                    <span className="inline-flex flex-col">
-                        Coaching <Image src="/line.svg" alt="line" width={200} height={2} />
+                    <span className="relative inline-flex flex-col">
+                        Coaching{' '}
+                        <Image
+                            src="/line.svg"
+                            alt="line"
+                            width={200}
+                            height={2}
+                            className="absolute -bottom-2 left-0"
+                        />
                     </span>{' '}
                     can change Everything
                 </h2>
