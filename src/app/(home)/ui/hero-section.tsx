@@ -1,11 +1,15 @@
 import { Image as ImageIcon } from 'lucide-react';
+import Image from 'next/image';
 
 export function HeroSection() {
     return (
         <section className="flex items-center justify-between gap-10 max-lg:flex-col-reverse max-lg:gap-6 lg:gap-6">
             <div className="px-6 lg:w-1/2">
                 <h2 className="leading-16 text-gray-700 capitalize max-lg:text-3xl max-lg:leading-10 lg:text-5xl">
-                    <span className="font-bold text-gray-900">Business</span> <span>Coaching</span>{' '}
+                    <span className="font-bold text-gray-900">Business</span>{' '}
+                    <span className="inline-flex flex-col">
+                        Coaching <Image src="/line.svg" alt="line" width={200} height={2} />
+                    </span>{' '}
                     can change Everything
                 </h2>
 

@@ -2,6 +2,7 @@ import { Header } from '@/components/header';
 
 import { BusinessSection } from './ui/business-section';
 import { HeroSection } from './ui/hero-section';
+import { OurPartners } from './ui/our-partners';
 import { SoluctionsSection } from './ui/solutions-section';
 
 export default function Home() {
@@ -13,6 +14,7 @@ export default function Home() {
                 <HeroSection />
                 <SoluctionsSection />
                 <BusinessSection />
+                <OurPartners />
             </main>
         </>
     );
