@@ -1,7 +1,7 @@
 import { Image as ImageIcon } from 'lucide-react';
 import Link from 'next/link';
 
-import { SectionTitle } from '@/components/section-title';
+import { SectionTitle } from '@/ui/section-title';
 
 export function BusinessSection() {
     return (

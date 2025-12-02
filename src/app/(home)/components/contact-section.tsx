@@ -1,7 +1,7 @@
 import Link from 'next/link';
 
-import { SectionTitle } from '@/components/section-title';
 import { NormalText } from '@/ui/normal-text';
+import { SectionTitle } from '@/ui/section-title';
 
 export function ContactSection() {
     return (

@@ -1,11 +1,11 @@
 import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
 
-import { BusinessSection } from './ui/business-section';
-import { ContactSection } from './ui/contact-section';
-import { HeroSection } from './ui/hero-section';
-import { OurPartners } from './ui/our-partners';
-import { SoluctionsSection } from './ui/solutions-section';
+import { BusinessSection } from './components/business-section';
+import { ContactSection } from './components/contact-section';
+import { HeroSection } from './components/hero-section';
+import { OurPartners } from './components/our-partners';
+import { SoluctionsSection } from './components/solutions-section';
 
 export default function Home() {
     return (
