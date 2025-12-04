@@ -7,7 +7,7 @@ import { FooterLinks } from './components/footer-links';
 
 export function Footer() {
     return (
-        <footer className="bg-gray-100 px-6 py-10 max-lg:px-4">
+        <footer className="bg-slate-800 px-6 py-10 max-lg:px-4">
             <div className="mx-auto max-w-7xl">
                 <div className="flex items-start justify-between max-lg:flex-col">
                     <div className="flex items-start gap-20">

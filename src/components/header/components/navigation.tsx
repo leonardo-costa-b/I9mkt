@@ -45,9 +45,10 @@ export function Navigation() {
                             <Link
                                 href={item.link}
                                 className={clsx(
-                                    'text-gray-500 transition-all max-lg:text-2xl max-lg:text-white lg:hover:text-gray-900',
+                                    'transition-all max-lg:text-2xl max-lg:text-white lg:hover:text-gray-100',
                                     {
-                                        'font-medium text-gray-900': pathname === item.link,
+                                        'font-medium text-gray-100': pathname === item.link,
+                                        'text-gray-400': pathname !== item.link,
                                     },
                                 )}
                             >
