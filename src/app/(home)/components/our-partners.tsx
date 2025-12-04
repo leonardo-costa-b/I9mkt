@@ -24,7 +24,7 @@ export function OurPartners() {
             <section ref={ref} className="mx-auto max-w-7xl py-10">
                 <h2 className="pb-6 pl-4 text-2xl">Our Partners</h2>
 
-                <div className="flex gap-10 rounded-3xl bg-slate-800 px-6 py-10">
+                <div className="relative flex gap-10 rounded-3xl bg-slate-800 px-6 py-10">
                     <ul className="w-full max-w-96 border-r border-slate-700 p-4">
                         {PARTNERS.map((partner) => (
                             <li key={partner.company_name}>
@@ -55,7 +55,10 @@ export function OurPartners() {
 
                     {partnerService.length > 0 &&
                         partnerService.map((partner) => (
-                            <div key={partner.company_name} className="flex w-full flex-col">
+                            <div
+                                key={partner.company_name}
+                                className="sticky top-4 flex h-fit w-full flex-col"
+                            >
                                 <h3 className="pt-4 text-2xl font-bold text-white">
                                     {partner.company_name}
                                 </h3>
