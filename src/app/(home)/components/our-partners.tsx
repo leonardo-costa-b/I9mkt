@@ -1,22 +1,41 @@
 'use client';
 
 import clsx from 'clsx';
-import { ArrowRight } from 'lucide-react';
-import { useRef, useState } from 'react';
+import { ArrowRight, Check, Forward, X } from 'lucide-react';
+import { FormEvent, useRef, useState } from 'react';
 
 import { PARTNERS } from '@/constants/partners';
+import { FeedbackModal } from '@/ui/feedback-modal';
+import { Input } from '@/ui/input';
 
 export function OurPartners() {
     const ref = useRef<HTMLDivElement | null>(null);
 
     const [partnerService, setPartnerService] = useState<typeof PARTNERS>([PARTNERS[0]]);
+    const [shouldShowModal, setShouldShowModal] = useState(false);
+    const [feedbackType, setFeedbackType] = useState<'SUCCESS' | 'ERROR' | null>(null);
 
-    function handleClick(partnerService: string) {
+    function handleSelectServicePartner(partnerService: string) {
         const filteredPartners = PARTNERS.filter(
             (partner) => partner.service_type === partnerService,
         );
         setPartnerService([...filteredPartners]);
         ref.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function handleToggleModal() {
+        setShouldShowModal(!shouldShowModal);
+        setFeedbackType(null);
+    }
+
+    function handleOnSubmit(e: FormEvent) {
+        e.preventDefault();
+
+        const formData = new FormData(e.target as HTMLFormElement);
+
+        console.log(Object.fromEntries(formData.entries()));
+
+        setFeedbackType('SUCCESS');
     }
 
     return (
@@ -41,7 +60,7 @@ export function OurPartners() {
                                             ),
                                         },
                                     )}
-                                    onClick={() => handleClick(partner.service_type)}
+                                    onClick={() => handleSelectServicePartner(partner.service_type)}
                                 >
                                     {partner.service_type}
 
@@ -59,88 +78,185 @@ export function OurPartners() {
                                 key={partner.company_name}
                                 className="sticky top-4 flex h-fit w-full flex-col"
                             >
-                                <h3 className="pt-4 text-2xl font-bold text-white">
-                                    {partner.company_name}
-                                </h3>
+                                <div className="flex items-start justify-between pt-4">
+                                    <div>
+                                        <h3 className="text-2xl font-bold text-white">
+                                            {partner.company_name}
+                                        </h3>
 
-                                <span className="block pt-2 pb-4 text-lg text-slate-400">
-                                    {partner.service_type}
-                                </span>
+                                        <span className="block pt-2 pb-4 text-lg text-slate-400">
+                                            {partner.service_type}
+                                        </span>
+                                    </div>
+
+                                    <button
+                                        type="button"
+                                        className="cursor-pointer"
+                                        onClick={handleToggleModal}
+                                    >
+                                        Solicite seu orçamento
+                                    </button>
+                                </div>
 
                                 <p>{partner.description}</p>
-
-                                {/* <form action="" className="mt-6 w-full rounded-lg bg-slate-900 p-6">
-                                    <h4 className="pb-4 text-lg font-semibold">
-                                        Formulário para contato
-                                    </h4>
-
-                                    <div className="flex items-stretch gap-4">
-                                        <input
-                                            type="text"
-                                            placeholder="Seu nome"
-                                            className="mb-4 w-full rounded-lg bg-slate-800 p-3"
-                                        />
-                                        <input
-                                            type="email"
-                                            placeholder="Seu email"
-                                            className="mb-4 w-full rounded-lg bg-slate-800 p-3"
-                                        />
-                                    </div>
-                                    <div className="flex gap-4">
-                                        <input
-                                            type="phone"
-                                            placeholder="Seu telefone"
-                                            className="mb-4 w-full rounded-lg bg-slate-800 p-3"
-                                        />
-                                        <input
-                                            type="text"
-                                            placeholder="Serviço de interesse"
-                                            className="mb-4 w-full rounded-lg bg-slate-800 p-3"
-                                            value={partner.service_type}
-                                            readOnly
-                                        />
-                                    </div>
-                                    <textarea
-                                        placeholder="Sua mensagem"
-                                        className="mb-4 max-h-40 w-full rounded-lg bg-slate-800 p-3"
-                                    ></textarea>
-
-                                    <div className="flex justify-end">
-                                        <button
-                                            type="submit"
-                                            className="rounded-lg bg-red-800 px-6 py-3 text-white transition-colors hover:bg-red-800"
-                                        >
-                                            Enviar
-                                        </button>
-                                    </div>
-                                </form> */}
                             </div>
                         ))}
                 </div>
 
-                {/* <div className="grid grid-cols-4 gap-6">
-                    {PARTNERS.map((partner) => (
-                        <div
-                            key={partner.company_name}
-                            className="group flex h-full w-full flex-col rounded-2xl bg-slate-800 p-4 shadow transition-shadow"
-                        >
-                            <h3 className="text-xl font-semibold text-red-600">
-                                {partner.company_name}
-                            </h3>
-                            <span className="inline-block pt-1 pb-2 text-sm text-gray-400">
-                                {partner.service_type}
-                            </span>
-                            <p className="pb-2 text-gray-600">{partner.description}</p>
+                <FeedbackModal.Root isOpen={shouldShowModal}>
+                    <FeedbackModal.Title
+                        title={
+                            feedbackType === 'SUCCESS'
+                                ? 'Solicitação enviada com sucesso!'
+                                : 'Formulário de orçamento'
+                        }
+                    />
+                    <FeedbackModal.Content>
+                        {feedbackType === 'SUCCESS' ? (
+                            <div className="flex flex-col items-center justify-center gap-4 pt-4">
+                                <div className="rounded-full bg-emerald-300 p-4">
+                                    <Check size={48} className="text-emerald-800" />
+                                </div>
 
-                            <Link
-                                href="#"
-                                className="mt-auto flex items-center justify-between rounded-lg bg-gray-300 p-2 text-white transition-colors group-hover:bg-red-700 max-lg:bg-red-700"
-                            >
-                                Saber Mais <ArrowRight />
-                            </Link>
-                        </div>
-                    ))}
-                </div> */}
+                                <p className="text-center">
+                                    Obrigado por entrar em contato! Em breve, um de nossos
+                                    representantes entrará em contato com você.
+                                </p>
+
+                                <FeedbackModal.Close onClose={handleToggleModal} />
+                            </div>
+                        ) : (
+                            <form className="flex w-full flex-col gap-4" onSubmit={handleOnSubmit}>
+                                <Input.Root className="w-full">
+                                    <Input.Label
+                                        label={{
+                                            for: 'customer-company',
+                                            text: 'Serviço / Empresa',
+                                        }}
+                                    />
+                                    <Input.Normal
+                                        input={{
+                                            type: 'text',
+                                            id: 'customer-company',
+                                            register: {
+                                                'sr-only': 'true',
+                                                value: `${partnerService[0].service_type} - ${partnerService[0].company_name}`,
+                                                disabled: true,
+                                            },
+                                            errors: false,
+                                            className: 'rounded-full!',
+                                        }}
+                                    />
+                                </Input.Root>
+
+                                <Input.Root className="w-full">
+                                    <Input.Label
+                                        label={{
+                                            for: 'customer-name',
+                                            text: 'Nome',
+                                        }}
+                                    />
+
+                                    <Input.Normal
+                                        input={{
+                                            type: 'text',
+                                            id: 'customer-name',
+                                            register: {},
+                                            errors: false,
+                                            className: 'rounded-full!',
+                                        }}
+                                    />
+                                </Input.Root>
+
+                                <Input.Root className="w-full">
+                                    <Input.Label
+                                        label={{
+                                            for: 'customer-lastname',
+                                            text: 'Sobrenome',
+                                        }}
+                                    />
+                                    <Input.Normal
+                                        input={{
+                                            type: 'text',
+                                            id: 'customer-lastname',
+                                            register: {},
+                                            errors: false,
+                                            className: 'rounded-full!',
+                                        }}
+                                    />
+                                </Input.Root>
+
+                                <Input.Root className="w-full">
+                                    <Input.Label
+                                        label={{
+                                            for: 'customer-email',
+                                            text: 'E-mail',
+                                        }}
+                                    />
+                                    <Input.Normal
+                                        input={{
+                                            type: 'email',
+                                            id: 'customer-email',
+                                            register: {},
+                                            errors: false,
+                                            className: 'rounded-full!',
+                                        }}
+                                    />
+                                </Input.Root>
+
+                                <Input.Root className="w-full">
+                                    <Input.Label
+                                        label={{
+                                            for: 'customer-phone',
+                                            text: 'Telefone',
+                                        }}
+                                    />
+                                    <Input.Phone
+                                        input={{
+                                            id: 'customer-phone',
+                                            register: {},
+                                            errors: false,
+                                            className: 'rounded-full!',
+                                        }}
+                                    />
+                                </Input.Root>
+
+                                <Input.Root className="flex w-full flex-col">
+                                    <Input.Label
+                                        label={{
+                                            for: 'customer-message',
+                                            text: 'Mensagem',
+                                        }}
+                                    />
+                                    <textarea
+                                        name="customer-message"
+                                        id="customer-message"
+                                        cols={30}
+                                        rows={10}
+                                        className="h-10 min-h-40 w-full rounded-lg border-2 border-slate-600 p-2 px-4 text-sm text-gray-100 shadow-2xl shadow-black/10 outline-0 placeholder:text-gray-400 focus:border-sky-500 disabled:cursor-no-drop disabled:bg-gray-300 disabled:opacity-50"
+                                    ></textarea>
+                                </Input.Root>
+
+                                <div className="flex w-full gap-4">
+                                    <button
+                                        type="button"
+                                        className="flex w-full cursor-pointer items-center justify-center gap-2 rounded-lg border border-slate-500 p-2 text-gray-400 transition-all hover:border-white hover:text-white"
+                                        onClick={handleToggleModal}
+                                    >
+                                        <X size={20} />
+                                        Cancelar
+                                    </button>
+                                    <button
+                                        type="submit"
+                                        className="flex w-full cursor-pointer items-center justify-center gap-2 rounded-lg bg-emerald-200 p-2 text-slate-950 transition-all hover:bg-emerald-100"
+                                    >
+                                        <Forward size={20} /> Enviar solicitação
+                                    </button>
+                                </div>
+                            </form>
+                        )}
+                    </FeedbackModal.Content>
+                </FeedbackModal.Root>
             </section>
         </>
     );
