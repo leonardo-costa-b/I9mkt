@@ -43,11 +43,11 @@ export function FeedbackModalRoot({
         createPortal(
             <>
                 <div
-                    className={clsx('fixed inset-0 z-30 bg-black/50', {
+                    className={clsx('animate-overlayShow fixed inset-0 z-30 bg-black/50', {
                         '': isOpen,
                     })}
                 />
-                <div className="fixed top-1/2 left-1/2 z-30 flex w-full max-w-lg -translate-1/2 flex-col items-center justify-center gap-3 rounded-xl bg-slate-800 p-4 max-md:w-11/12">
+                <div className="animate-contentShow fixed top-1/2 left-1/2 z-30 flex w-full max-w-lg -translate-1/2 flex-col items-center justify-center gap-3 rounded-xl bg-slate-800 p-4 max-md:w-11/12">
                     {children}
                 </div>
             </>,
